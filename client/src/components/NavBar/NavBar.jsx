@@ -1,21 +1,30 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+import { UserContext } from '../../context/UserContext';
+import userService from '../../utils/userService';
 import './NavBar.css';
 
-const NavBar = (props) => {
-  let nav = props.user ?
+const NavBar = () => {
+  const [state, setState] = React.useContext(UserContext)
+  const handleLogout = () => {
+    userService.logout()
+    setState({ ...state, user: null })
+  }
+
+
+  let nav = state.user ?
     <div>
-      <Link to='/high-scores' className='NavBar-link'>HIGH SCORES</Link>
+      <NavLink to='/protected' className='NavBar-link'>Protected Route</NavLink>
       &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <Link to='' className='NavBar-link' onClick={props.handleLogout}>LOG OUT</Link>
+      <NavLink to='' className='NavBar-link' onClick={handleLogout}>LOG OUT</NavLink>
       &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <span className='NavBar-welcome'>WELCOME, {props.user.name}</span>
+      <span className='NavBar-welcome'>WELCOME, {state.user.name}</span>
     </div>
     :
     <div>
-      <Link to='/login' className='NavBar-link'>LOG IN</Link>
+      <NavLink to='/login' className='NavBar-link'>LOG IN</NavLink>
       &nbsp;&nbsp;|&nbsp;&nbsp;
-      <Link to='/signup' className='NavBar-link'>SIGN UP</Link>
+      <NavLink to='/signup' className='NavBar-link'>SIGN UP</NavLink>
     </div>;
 
   return (

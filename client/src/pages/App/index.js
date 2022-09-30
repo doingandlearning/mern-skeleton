@@ -7,6 +7,9 @@ import LoginPage from "../LoginPage/LoginPage";
 
 import userService from "../../utils/userService";
 import { UserContext } from "../../context/UserContext";
+import { ProtectedRoute } from "../../utils/route";
+import NavBar from "../../components/NavBar/NavBar";
+import ProtectedPage from "../ProtectedPage";
 
 const colors = {
   Easy: ["#7CCCE5", "#FDE47F", "#E04644", "#B576AD"],
@@ -19,22 +22,23 @@ function App() {
   console.log(state);
   return (
     <div>
-      <header className="header-footer">MERN Skeleton</header>
+      <header className="header">
+        <p>MERN Skeleton</p> <NavBar />
+      </header>
       <Routes>
         <Route path="/" element={<HomePage />} />
 
         <Route exact path="/signup" element={<SignupPage />} />
         <Route exact path="/login" element={<LoginPage />} />
-        {/* <ProtectedRoute
+        <Route
           exact
-          path="/high-scores"
-          component={
-            <HighScoresPage
-              scores={this.state.scores}
-              handleUpdateScores={this.handleUpdateScores}
-            />
+          path="/protected"
+          element={
+            <ProtectedRoute>
+              <ProtectedPage />
+            </ProtectedRoute>
           }
-        /> */}
+        />
       </Routes>
     </div>
   );

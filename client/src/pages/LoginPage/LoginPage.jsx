@@ -1,9 +1,17 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 import userService from '../../utils/userService';
+import { UserContext } from '../../context/UserContext';
 
 function LoginPage() {
+  const navigate = useNavigate()
+  const [_, setState] = React.useContext(UserContext)
+
+  const handleSignupOrLogin = () => {
+    const freshUser = userService.getUser()
+    setState((state) => ({ ...state, user: freshUser }))
+  }
 
   const [formState, setFormState] = React.useState({
     email: '',
@@ -23,40 +31,38 @@ function LoginPage() {
     try {
       await userService.login(formState);
       // Let <App> know a user has signed up!
-      this.props.handleSignupOrLogin();
+      handleSignupOrLogin();
       // Successfully signed up - show GamePage
-      this.props.history.push('/');
+      navigate('/');
     } catch (err) {
       // Use a modal or toast in your apps instead of alert
       alert('Invalid Credentials!');
     }
   }
 
-  render() {
-    return (
-      <div className="LoginPage">
-        <header className="header-footer">Log In</header>
-        <form className="form-horizontal" onSubmit={this.handleSubmit} >
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input type="email" className="form-control" placeholder="Email" value={formState.email} name="email" onChange={this.handleChange} />
-            </div>
+  return (
+    <div className="LoginPage">
+      <header className="header-footer">Log In</header>
+      <form className="form-horizontal" onSubmit={handleSubmit} >
+        <div className="form-group">
+          <div className="col-sm-12">
+            <input type="email" className="form-control" placeholder="Email" value={formState.email} name="email" onChange={handleChange} />
           </div>
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input type="password" className="form-control" placeholder="Password" value={formState.pw} name="pw" onChange={this.handleChange} />
-            </div>
+        </div>
+        <div className="form-group">
+          <div className="col-sm-12">
+            <input type="password" className="form-control" placeholder="Password" value={formState.pw} name="pw" onChange={handleChange} />
           </div>
-          <div className="form-group">
-            <div className="col-sm-12 text-center">
-              <button className="btn btn-default">Log In</button>&nbsp;&nbsp;&nbsp;
-              <Link to='/'>Cancel</Link>
-            </div>
+        </div>
+        <div className="form-group">
+          <div className="col-sm-12 text-center">
+            <button className="btn btn-default">Log In</button>&nbsp;&nbsp;&nbsp;
+            <Link to='/'>Cancel</Link>
           </div>
-        </form>
-      </div>
-    );
-  }
+        </div>
+      </form>
+    </div>
+  );
 }
 
 export default LoginPage;

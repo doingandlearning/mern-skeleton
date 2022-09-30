@@ -6,7 +6,7 @@ import './SignupPage.css';
 
 function SignupPage() {
   const [message, setMessage] = React.useState("")
-  const [state, setState] = React.useContext(UserContext)
+  const [_, setState] = React.useContext(UserContext)
 
   const handleSignupOrLogin = () => {
     const freshUser = userService.getUser()

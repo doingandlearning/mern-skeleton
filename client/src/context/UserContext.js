@@ -1,7 +1,7 @@
 import React from "react";
 
 const initialState = {
-  user: {},
+  user: null,
 };
 
 export const UserContext = React.createContext(initialState);
