@@ -18,15 +18,13 @@ const colors = {
 };
 
 function App() {
-  const [state] = React.useContext(UserContext);
-  console.log(state);
   return (
     <div>
       <header className="header">
         <p>MERN Skeleton</p> <NavBar />
       </header>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route exact path="/" element={<HomePage />} />
 
         <Route exact path="/signup" element={<SignupPage />} />
         <Route exact path="/login" element={<LoginPage />} />
