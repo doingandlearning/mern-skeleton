@@ -8,6 +8,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 import userRoutes from "./routes/api/users.js";
+import auth from "./config/auth.js";
 
 import { connectToDb } from "./config/database.js";
 
@@ -20,6 +21,7 @@ const app = express();
 app.use(logger("dev"));
 app.use(express.json());
 app.use(cors());
+app.use(auth);
 
 // Proxy
 app.use(favicon(join(__dirname, "..", "client", "build", "favicon.ico")));
