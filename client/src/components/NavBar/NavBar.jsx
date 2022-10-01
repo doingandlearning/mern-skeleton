@@ -8,7 +8,7 @@ const NavBar = () => {
 
   let nav = user ?
     <div>
-      <NavLink to='/protected' className='NavBar-link'>Protected Route</NavLink>
+      <NavLink to='/products/add' className='NavBar-link'>Add Product</NavLink>
       &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
       <NavLink to='' className='NavBar-link' onClick={handleLogout}>LOG OUT</NavLink>
       &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;

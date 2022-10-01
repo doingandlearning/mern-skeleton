@@ -5,11 +5,25 @@ import HomePage from "../HomePage";
 import SignupPage from "../SignupPage/SignupPage";
 import LoginPage from "../LoginPage/LoginPage";
 
+import AddProduct from "../Products/AddProduct";
+import ViewProducts from "../Products/ViewProducts";
+import ViewProduct from "../Products/ViewProduct";
+
 import { ProtectedRoute } from "../../utils/route";
+import useUser from "../../hooks/useUser";
 import NavBar from "../../components/NavBar/NavBar";
 import ProtectedPage from "../ProtectedPage";
 
 function App() {
+  const { refreshAuth } = useUser();
+
+  React.useEffect(() => {
+    async function run() {
+      await refreshAuth();
+    }
+    run();
+  }, []);
+
   return (
     <div>
       <header className="header">
@@ -29,6 +43,17 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          exact
+          path="/products/add"
+          element={
+            <ProtectedRoute>
+              <AddProduct />
+            </ProtectedRoute>
+          }
+        />
+        <Route exact path="/products" element={<ViewProducts />} />
+        <Route exact path="/products/:id" element={<ViewProduct />} />
       </Routes>
     </div>
   );

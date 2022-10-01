@@ -21,6 +21,7 @@ const app = express();
 
 app.use(logger("dev"));
 app.use(express.json());
+app.use(express.urlencoded());
 app.use(cors());
 app.use(auth);
 
