@@ -2,16 +2,11 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 import userService from '../../utils/userService';
-import { UserContext } from '../../context/UserContext';
+import useUser from '../../hooks/useUser';
 
 function LoginPage() {
   const navigate = useNavigate()
-  const [_, setState] = React.useContext(UserContext)
-
-  const handleSignupOrLogin = () => {
-    const freshUser = userService.getUser()
-    setState((state) => ({ ...state, user: freshUser }))
-  }
+  const { handleSignupOrLogin } = useUser()
 
   const [formState, setFormState] = React.useState({
     email: '',

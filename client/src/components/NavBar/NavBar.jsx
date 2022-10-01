@@ -1,24 +1,18 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { UserContext } from '../../context/UserContext';
-import userService from '../../utils/userService';
+import { NavLink } from 'react-router-dom';
+import useUser from '../../hooks/useUser';
 import './NavBar.css';
 
 const NavBar = () => {
-  const [state, setState] = React.useContext(UserContext)
-  const handleLogout = () => {
-    userService.logout()
-    setState({ ...state, user: null })
-  }
+  const { handleLogout, user } = useUser()
 
-
-  let nav = state.user ?
+  let nav = user ?
     <div>
       <NavLink to='/protected' className='NavBar-link'>Protected Route</NavLink>
       &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
       <NavLink to='' className='NavBar-link' onClick={handleLogout}>LOG OUT</NavLink>
       &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <span className='NavBar-welcome'>WELCOME, {state.user.name}</span>
+      <span className='NavBar-welcome'>WELCOME, {user.name}</span>
     </div>
     :
     <div>

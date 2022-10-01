@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import userService from '../../utils/userService';
+import useUser from '../../hooks/useUser';
 
-function SignupForm({ updateMessage, handleSignupOrLogin }) {
+function SignupForm({ updateMessage }) {
   const navigate = useNavigate()
+  const { handleSignupOrLogin } = useUser()
+
   const [state, setState] = React.useState({
     name: '',
     email: '',
