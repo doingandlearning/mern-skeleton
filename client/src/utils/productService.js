@@ -33,3 +33,21 @@ export const getProduct = async (id) => {
     console.log(err);
   }
 };
+
+export const updateProduct = async (id, product) => {
+  console.log(product);
+  try {
+    const token = tokenService.getToken();
+    let response = await fetch(`/api/products/${id}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+      body: product,
+    });
+    console.log(response);
+    return response.json();
+  } catch (err) {
+    console.log(err);
+  }
+};

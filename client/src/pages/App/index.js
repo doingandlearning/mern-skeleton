@@ -8,6 +8,7 @@ import LoginPage from "../LoginPage/LoginPage";
 import AddProduct from "../Products/AddProduct";
 import ViewProducts from "../Products/ViewProducts";
 import ViewProduct from "../Products/ViewProduct";
+import UpdateProduct from "../Products/UpdateProduct";
 
 import { ProtectedRoute } from "../../utils/route";
 import useUser from "../../hooks/useUser";
@@ -54,6 +55,7 @@ function App() {
         />
         <Route exact path="/products" element={<ViewProducts />} />
         <Route exact path="/products/:id" element={<ViewProduct />} />
+        <Route exact path="/products/update/:id" element={<UpdateProduct />} />
       </Routes>
     </div>
   );

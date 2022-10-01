@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 import { getProducts } from "../../../utils/productService";
 
 import "./ViewProducts.css";
@@ -20,10 +22,12 @@ export default function ViewProducts() {
       {products.map((product) => {
         return (
           <div className="productCard">
-            <p>{product.name}</p>
-            <p>{product.description}</p>
-            <p>{product.price}</p>
-            <p>{product.quantity} left</p>
+            <Link to={`/products/${product._id}`}>
+              <p>{product.name}</p>
+              <p>{product.description}</p>
+              <p>{product.price}</p>
+              <p>{product.quantity} left</p>
+            </Link>
           </div>
         );
       })}
