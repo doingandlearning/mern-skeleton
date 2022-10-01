@@ -8,6 +8,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 import userRoutes from "./routes/api/users.js";
+import productRoutes from "./routes/api/products.js";
 import auth from "./config/auth.js";
 
 import { connectToDb } from "./config/database.js";
@@ -29,6 +30,7 @@ app.use(express.static(join(__dirname, "..", "client", "build")));
 
 // Put API routes here, before the "catch all" route
 app.use("/api/users", userRoutes);
+app.use("/api/products", productRoutes);
 
 // The following "catch all" route (note the *)is necessary
 // for a SPA's client-side routing to properly work

@@ -38,13 +38,13 @@ export async function getAllProducts(req, res, next) {
 
 export async function updateProduct(req, res, next) {
   try {
-    const updatedProduct = await Book.findByIdAndUpdate(
+    const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
     );
     res.json(updatedProduct);
-  } catch (error) {
+  } catch (err) {
     console.log(err);
     res.status(400).json(err);
   }
